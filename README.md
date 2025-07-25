@@ -12,37 +12,28 @@ This is not a prototype—it's a full-stack agentic system for scalable, self-im
 Welcome to the future of intelligent AI/MLOps.
 
 
-🔧 Core Script Overview
-pipelines/data_pipeline.py
+![Prompt_1](images/Prompt_1.png)
+Role specification: Framing the model as an expert Python agent developer sets a high expectation for output quality and modularity.
+Agent modularity: The design is declarative, encouraging the model to follow LangGraph’s subgraph architecture cleanly.
+Tool-based restriction: Clearly separates LLM work (query generation) from deterministic tool execution (search), avoiding hallucination and making the agent robust.
+Realistic integration: Mentions existing tools.py, reinforcing reusability and grounding the response in your real codebase.
+![Prompt_2](images/Prompt_2.png)
+Clear goal: A very focused prompt with an unambiguous expected outcome.
+Informed suggestions: Mentions specific libraries, guiding the model toward practical, executable solutions rather than abstract ideas.
+Extensible: Opens the door for multi-modal parsing (images + text) via tools like pytesseract, demonstrating forward-thinking.
+![Prompt_3](images/Prompt_3.png)
+Consistent design: Promotes reuse of a successful pattern (scraping_agent), reducing architectural drift across agents.
+Clean separation of concerns: Explicitly differentiates between content and metadata in state management—an excellent practice for downstream processing.
+Minimal LLM dependence: Emphasizes extracting and cleaning rather than summarizing, keeping LLM calls efficient and controlled.
+![Prompt_4](images/Prompt_4.png)
+High-level goal, grounded execution: Clearly communicates intent (data cleaning), while grounding implementation in stateful LangGraph patterns.
+Selective LLM usage: Reinforces the need for LLM only where needed—ideal for avoiding overuse or waste of tokens.
+Pipeline alignment: Ensures that the cleaned data is agent-compatible for the next stage, showing awareness of the full system.
+![Prompt_5](images/Prompt_5.png)
+Strong chaining logic: Perfect example of multi-agent composition, as this agent depends on structured output from previous ones.
+Output format control: The prompt ensures output is JSON/dict, critical for downstream automation and evaluation.
+Clarity in state update: Maintaining QA_augment state reinforces reproducibility and structure across the entire pipeline.
 
-This script builds the full end-to-end data generation pipeline using multiple agents (scraper, PDF parser, cleaning, augmentation). It ensures that training data is clean, QA-augmented, and ready for fine-tuning. This is the heart of the automated data engine.
-pipelines/training_pipeline.py
-
-Takes the prepared data, formats it into OpenAI-compatible schema, and launches fine-tuning using parameters defined in training_config.yaml. It abstracts away all training logic for plug-and-play model updates.
-pipelines/evaluation_pipeline.py
-
-Automatically generates benchmark QA data using agents, loads two models (baseline vs candidate), and evaluates them via vLLM. It provides a clean comparison report that helps guide model improvements.
-pipelines/deployment_pipeline.py
-
-Sets up REST API endpoints for both the trained LLM and all intelligent agents. It makes the full system usable as a microservice via Docker and fast API serving logic.
-pipelines/cron_pipeline.yaml
-
-A GitHub Actions cron job YAML that schedules automatic data generation and model training monthly. It guarantees continuous improvement without manual intervention.
-config/formatting_config.yaml
-
-Holds schema and formatting rules for data conversion into OpenAI-compatible format. Critical for consistency during training.
-config/training_config.yaml
-
-Centralizes all fine-tuning hyperparameters — model name, batch size, epochs, and optimizer settings. It allows reproducible and configurable training without modifying code.
-config/deployment_config.yaml
-
-Specifies serving parameters for deploying the LLM and agent endpoints. Ensures flexible and environment-aware deployment.
-Dockerfile.agent, Dockerfile.model, and docker-compose.yml
-
-These define two separate Docker environments: one for agents and one for the LLM model. docker-compose.yml unifies them into a full-stack service deployable anywhere.
-tools.py
-
-Utility script containing helper functions shared across agents (e.g., text cleaning, deduplication, QA formatting). Keeps logic reusable and DRY.
 🧠 How It All Works Together
 
 This project is a modern Agentic AI + MLOps workflow designed with modularity, scalability, and automation at its core. Each task in the machine learning lifecycle — from data collection to evaluation and deployment — is powered by intelligent agents. Here's how the components interact:
