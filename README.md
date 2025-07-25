@@ -11,34 +11,34 @@ All logic is wrapped in Docker and served as REST APIs for production deployment
 This is not a prototype—it's a full-stack agentic system for scalable, self-improving AI pipelines.
 Welcome to the future of intelligent AI/MLOps.
 
-============================================================================
+___
 ![Prompt_1](images/Prompt_1.png)
-============================================================================
+___
 Role specification: Framing the model as an expert Python agent developer sets a high expectation for output quality and modularity.
 Agent modularity: The design is declarative, encouraging the model to follow LangGraph’s subgraph architecture cleanly.
 Tool-based restriction: Clearly separates LLM work (query generation) from deterministic tool execution (search), avoiding hallucination and making the agent robust.
 Realistic integration: Mentions existing tools.py, reinforcing reusability and grounding the response in your real codebase.
-============================================================================
+___
 ![Prompt_2](images/Prompt_2.png)
-============================================================================
+___
 Clear goal: A very focused prompt with an unambiguous expected outcome.
 Informed suggestions: Mentions specific libraries, guiding the model toward practical, executable solutions rather than abstract ideas.
 Extensible: Opens the door for multi-modal parsing (images + text) via tools like pytesseract, demonstrating forward-thinking.
-============================================================================
+___
 ![Prompt_3](images/Prompt_3.png)
-============================================================================
+___
 Consistent design: Promotes reuse of a successful pattern (scraping_agent), reducing architectural drift across agents.
 Clean separation of concerns: Explicitly differentiates between content and metadata in state management—an excellent practice for downstream processing.
 Minimal LLM dependence: Emphasizes extracting and cleaning rather than summarizing, keeping LLM calls efficient and controlled.
-============================================================================
+___
 ![Prompt_4](images/Prompt_4.png)
-============================================================================
+___
 High-level goal, grounded execution: Clearly communicates intent (data cleaning), while grounding implementation in stateful LangGraph patterns.
 Selective LLM usage: Reinforces the need for LLM only where needed—ideal for avoiding overuse or waste of tokens.
 Pipeline alignment: Ensures that the cleaned data is agent-compatible for the next stage, showing awareness of the full system.
-============================================================================
+___
 ![Prompt_5](images/Prompt_5.png)
-============================================================================
+___
 Strong chaining logic: Perfect example of multi-agent composition, as this agent depends on structured output from previous ones.
 Output format control: The prompt ensures output is JSON/dict, critical for downstream automation and evaluation.
 Clarity in state update: Maintaining QA_augment state reinforces reproducibility and structure across the entire pipeline.
