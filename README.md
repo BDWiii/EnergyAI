@@ -9,6 +9,7 @@ Training uses configurable fine-tuning logic powered by OpenAI schema formatting
 Evaluation runs monthly via GitHub Actions, comparing candidate models against a benchmark QA set.
 All logic is wrapped in Docker and served as REST APIs for production deployment.
 This is not a prototype—it's a full-stack agentic system for scalable, self-improving AI pipelines.
+which is purposeful if to make end-to-end workflow for fine-tuning LLMs.
 Welcome to the future of intelligent AI/MLOps.
 
 🧠 Prompt Engineering Showcase
