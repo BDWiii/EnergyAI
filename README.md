@@ -11,6 +11,8 @@ All logic is wrapped in Docker and served as REST APIs for production deployment
 This is not a prototype—it's a full-stack agentic system for scalable, self-improving AI pipelines.
 Welcome to the future of intelligent AI/MLOps.
 
+🧠 Prompt Engineering Showcase
+Each agent in this system was designed using targeted prompt engineering strategies that emphasize clarity, modularity, and safe LLM usage. Below are five key prompts used to generate major components of the system:
 ___
 ![Prompt_1](images/Prompt_1.png)
 ___
