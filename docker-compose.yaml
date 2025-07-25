@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  llm-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.llm
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_PATH=/app/model
+      - TENSOR_PARALLEL_SIZE=1
+      - MAX_MODEL_LEN=4096
+      - GPU_MEMORY_UTILIZATION=0.9
+    volumes:
+      - ./models:/app/model
+    runtime: nvidia
+    
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  agent-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    ports:
+      - "8001:8001"
+    depends_on:
+      - llm-server
+    environment:
+      - LLM_SERVER_URL=http://llm-server:8000
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  default:
+    driver: bridge
